@@ -108,6 +108,10 @@ class HoltWinter:
             yh.append(yt)
             a0 = at
             b0 = bt
+            # Prevent st from being zero
+            # TODO: better way to achieve numerical stable
+            if st < 0.0001:
+                st = 0.0001
             s[idx] = st
 
         #3. calcuate the error

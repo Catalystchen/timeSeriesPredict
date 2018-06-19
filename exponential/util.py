@@ -21,9 +21,14 @@ def calc_rmse(y, yh, n):
     rmse = math.sqrt(err/n)
     return rmse
 
-def plot_figs(y, yhat, title):
-    plt.plot(y, label='real')
-    plt.plot(yhat, label='predict')
+def plot_figs(data, title):
+    if len(data) < 1:
+        print("Error: empty data for plot.")
+        return
+    
+    for pair in data:
+        legend, y = pair
+        plt.plot(y, label=legend)
     plt.legend()
     plt.title(title)
     plt.grid(True)

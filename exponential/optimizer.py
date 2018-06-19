@@ -28,6 +28,8 @@ class SimpleOptimizer:
                 continue
             
             nerr, _ = model.predict(yvalidate)
+            #msg = "k=%d, nerr=%.4f" % (nk, nerr)
+            #print(msg)
             if nerr < err:
                 err = nerr
                 k = nk
@@ -79,5 +81,5 @@ def _optimizer(fun, x0, margs, bounds):
                       args = margs)
     
     if not result.success:
-        print("Failed to optimize: " + result.message)
+        print("Failed to optimize: %s" % (result.message))
     return result.success, result.x

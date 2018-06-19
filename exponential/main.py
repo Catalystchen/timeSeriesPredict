@@ -17,18 +17,24 @@ def split_data(y):
 def simple_test(y):
     ytrain, yvalidate = split_data(y)
 
-    maxk = 13
+    maxk = 36
     optimizer = SimpleOptimizer(maxk) 
-    model = HoltWinterDamp()
+    #model = HoltWinterDamp()
+    model = HoltWinter()
     #model = Holt()
 
     optimizer.optimize_k(model, ytrain, yvalidate)
+    #model.set_season(11)
     #optimizer.optimize(model, ytrain)
 
     err, yh = model.predict(y)
-    msg = "season=%s, error=%.3f" % (model.get_season(), err)
+    msg = "season=%s, error=%.4f" % (model.get_season(), err)
     print(msg + "\n" + model.get_info())
-    util.plot_figs(y, yh, msg)
+
+    data = []
+    data.append(('real', y))
+    data.append(('predict', yh))
+    util.plot_figs(data, msg)
     return
 
 def compare_models(y):
@@ -59,7 +65,10 @@ def compare_models(y):
         msg = "model:%s err=%.4f" % (model.get_info(), err)
         print(msg)
         title = "model: %s, rmse=%.4f" % (name, err)
-        util.plot_figs(y, yh, title)
+        data = []
+        data.append(('real', y))
+        data.append(('predict', yh))
+        util.plot_figs(data, title)
 
     return
 
