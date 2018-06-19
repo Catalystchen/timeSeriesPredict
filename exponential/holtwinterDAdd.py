@@ -1,29 +1,22 @@
 from __future__ import division
-from sys import exit
-from math import sqrt
 import math
-from numpy import array
 from scipy.optimize import minimize
 import matplotlib.pyplot as plt
 import util
 
 
-class HoltWinter:
-    """Triple Exponential Smoothin, a.k.a 
-      Holter-Winter's method with multiplicative seasonality.
+class HoltWinterDampAdd:
+    """Triple Exponential Smoothin with damped, a.k.a 
+      Holter-Winter's method with damped trend and 
+      additive seasonality.
 
-      lt = alpha*(y[t] /s[t-m]) + (1-alpha)*(l[t-1] + b[t-1])
-      bt = beta*(l[t] - l[t-1]) + (1-beta)*b[t-1]
-      st = gamma*(y[t] / (l[t-1] - b[t-1])) + (1-gamma) * s[t-m]
-
-      yhat = (lt + bt) * s[t+1-m]
-      
       https://www.otexts.org/fpp/7/5
     """
-    def __init__(self, name='Holt-Winter'):
+    def __init__(self, name='Holt-Winder-D-Add'):
         self.alpha = 0.5
         self.beta = 0.5
         self.gamma = 0.5
+        self.damp = 0.85
 
         self.season = 12
         self.name = name
@@ -34,7 +27,11 @@ class HoltWinter:
 
     def set_name(self, name):
         self.name = name
-        return
+        return    
+
+    def set_damp(self, d):
+        """damp should be in the range of [0, 0.98]"""
+        self.damp = d
 
     def set_season(self, k):
         """set the number of seasons"""
@@ -45,31 +42,34 @@ class HoltWinter:
         return self.season
 
     def get_info(self):
-        template = "%s season=%s, [%.3f, %.3f, %.3f]" 
+        template = "%s season=%s, [%.3f, %.3f, %.3f, %.3f]" 
         msg = template % (self.name,
                           self.season,
                           self.alpha,
                           self.beta,
-                          self.gamma)
+                          self.gamma,
+                          self.damp)
         return msg
 
     def set_parameters(self, params):
         self.alpha = params[0]
         self.beta = params[1]
         self.gamma = params[2]
+        self.damp = params[3]
         return
-
-    def get_boundary(self):
-        """the bounds of the parameters when optimizing"""
-        bd = (0, 1)
-        result = [bd, bd, bd]
-        return result
 
     def get_parameters(self):
         result = []
         result.append(self.alpha)
         result.append(self.beta)
         result.append(self.gamma)
+        result.append(self.damp)
+        return result
+
+    def get_boundary(self):
+        """the bounds of the parameters when optimizing"""
+        bd = (0,1)
+        result = [bd, bd, bd, (0, 0.99)]
         return result
 
     def calc_init_values(self, y, k):
@@ -82,36 +82,33 @@ class HoltWinter:
 
         s0 = {}
         for i in range(k):
-            s0[i] = y[i] / a0
+            s0[i] = y[i] - a0
         return a0, b0, s0
 
     def predict(self, y):
         # 1. set the initial values
         a0, b0, s = self.calc_init_values(y, self.season)
-        y0 = (a0 + b0)*s[0]
+        y0 = a0 + b0 + s[0]
         yh = [y0]
 
         alpha = self.alpha
         beta = self.beta
         gamma = self.gamma
+        damp = self.damp
         
         # 2. rolling predict
         for i in range(len(y)):
             idx = i % self.season
-            at = alpha * (y[i]/s[idx]) + (1-alpha) * (a0 + b0)
-            bt = beta * (at - a0) + (1-beta)*b0
-            st = gamma * (y[i]/(a0+b0)) + (1-gamma) * s[idx]
+            at = alpha * (y[i]-s[idx]) + (1-alpha) * (a0 + b0)
+            bt = beta * (at - a0) + (1-beta)*damp*b0
+            st = gamma * (y[i]-(a0 + damp*b0)) + (1-gamma) * s[idx]
             # TODO: verify these two
-            yt = (a0 + b0)*st
-            #yt = (at + bt)*st
+            #yt = (at + damp*bt)+st
+            yt = (a0 + damp*b0)+st
 
             yh.append(yt)
             a0 = at
             b0 = bt
-            # Prevent st from being zero
-            # TODO: better way to achieve numerical stable
-            if st < 0.0001:
-                st = 0.0001
             s[idx] = st
 
         #3. calcuate the error

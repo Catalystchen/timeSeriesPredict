@@ -8,19 +8,19 @@ import matplotlib.pyplot as plt
 import util
 
 
-class HoltWinter:
+class HoltWinterAdd:
     """Triple Exponential Smoothin, a.k.a 
-      Holter-Winter's method with multiplicative seasonality.
+      Holter-Winter's method with Additive seasonality.
 
-      lt = alpha*(y[t] /s[t-m]) + (1-alpha)*(l[t-1] + b[t-1])
+      lt = alpha*(y[t] - s[t-m]) + (1-alpha)*(l[t-1] + b[t-1])
       bt = beta*(l[t] - l[t-1]) + (1-beta)*b[t-1]
-      st = gamma*(y[t] / (l[t-1] - b[t-1])) + (1-gamma) * s[t-m]
+      st = gamma*(y[t] - l[t-1] - b[t-1]) + (1-gamma) * s[t-m]
 
-      yhat = (lt + bt) * s[t+1-m]
+      yhat = lt + bt + s[t+1-m]
       
       https://www.otexts.org/fpp/7/5
     """
-    def __init__(self, name='Holt-Winter'):
+    def __init__(self, name='Holt-Winter-Add'):
         self.alpha = 0.5
         self.beta = 0.5
         self.gamma = 0.5
@@ -82,13 +82,13 @@ class HoltWinter:
 
         s0 = {}
         for i in range(k):
-            s0[i] = y[i] / a0
+            s0[i] = y[i] - a0
         return a0, b0, s0
 
     def predict(self, y):
         # 1. set the initial values
         a0, b0, s = self.calc_init_values(y, self.season)
-        y0 = (a0 + b0)*s[0]
+        y0 = a0 + b0 + s[0]
         yh = [y0]
 
         alpha = self.alpha
@@ -98,20 +98,16 @@ class HoltWinter:
         # 2. rolling predict
         for i in range(len(y)):
             idx = i % self.season
-            at = alpha * (y[i]/s[idx]) + (1-alpha) * (a0 + b0)
+            at = alpha * (y[i] - s[idx]) + (1-alpha) * (a0 + b0)
             bt = beta * (at - a0) + (1-beta)*b0
-            st = gamma * (y[i]/(a0+b0)) + (1-gamma) * s[idx]
+            st = gamma * (y[i] - (a0+b0)) + (1-gamma) * s[idx]
             # TODO: verify these two
-            yt = (a0 + b0)*st
-            #yt = (at + bt)*st
+            yt = a0 + b0 + st
+            #yt = at + bt + st
 
             yh.append(yt)
             a0 = at
             b0 = bt
-            # Prevent st from being zero
-            # TODO: better way to achieve numerical stable
-            if st < 0.0001:
-                st = 0.0001
             s[idx] = st
 
         #3. calcuate the error

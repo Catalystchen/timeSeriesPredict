@@ -28,8 +28,8 @@ class SimpleOptimizer:
                 continue
             
             nerr, _ = model.predict(yvalidate)
-            #msg = "k=%d, nerr=%.4f" % (nk, nerr)
-            #print(msg)
+            msg = "k=%d, nerr=%.4f" % (nk, nerr)
+            print(msg)
             if nerr < err:
                 err = nerr
                 k = nk

@@ -6,6 +6,8 @@ import util
 from holtwinter import HoltWinter
 from holtwinterd import HoltWinterDamp
 from holt import Holt
+from holtwinterAdd import HoltWinterAdd
+from holtwinterDAdd import HoltWinterDampAdd
 from optimizer import SimpleOptimizer
 
 def split_data(y):
@@ -19,12 +21,14 @@ def simple_test(y):
 
     maxk = 36
     optimizer = SimpleOptimizer(maxk) 
-    #model = HoltWinterDamp()
-    model = HoltWinter()
+    model = HoltWinterDamp()
+    #model = HoltWinter()
+    #model = HoltWinterAdd()
+    #model = HoltWinterDampAdd()
     #model = Holt()
 
     optimizer.optimize_k(model, ytrain, yvalidate)
-    #model.set_season(11)
+    #model.set_season(24)
     #optimizer.optimize(model, ytrain)
 
     err, yh = model.predict(y)
@@ -76,9 +80,10 @@ def main():
     fname = "AirPassengers.csv" 
     #fname = "shampoo-sales.csv"
     #fname = "daily_birth.csv"
+    #fname = "denver.csv"
     y = util.load_series("../data/" + fname)
-    #simple_test(y)
-    compare_models(y)
+    simple_test(y)
+    #compare_models(y)
     return
 
 if __name__ == "__main__":
