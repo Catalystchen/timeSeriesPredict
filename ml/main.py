@@ -19,7 +19,7 @@ from __future__ import print_function
 
 import tensorflow as tf
 import math
-import data_dnn  
+import feature_dnn  
 
 STEPS = 30000
 VALUE_NORM_FACTOR = 50
@@ -127,7 +127,7 @@ def main(argv):
   """Builds, trains, and evaluates the model."""
   assert len(argv) == 1
   print("tensorflow version: %s" % (tf.VERSION))
-  (train, test) = data_dnn.dataset()
+  (train, test) = feature_dnn.dataset()
 
   # Build the training input_fn.
   def input_train():
@@ -157,7 +157,7 @@ def my_input_fun(dat):
 
 def full_eval(model):
   """calculate the RMSE on training and validation set."""
-  train, test = data_dnn.dataset()
+  train, test = feature_dnn.dataset()
 
   r1 = model.evaluate(input_fn=lambda : my_input_fun(train))
   r2 = model.evaluate(input_fn=lambda : my_input_fun(test))
