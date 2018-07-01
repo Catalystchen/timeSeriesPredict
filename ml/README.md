@@ -11,9 +11,11 @@ These two models are used to do one step ahead prediction.
 
 
 # Prediction performance
-The `Baseline` method is to use the value of last step as the predicted value of next step;
-The `DNN` model is a simple shallow nerual networks with three hidden layers: 32 x 16 x 16;
-The `Linear` model has the same feature set as the `DNN` model.
+Three models are used to evaluate the performance:
+
+* The `Baseline` method is to use the value of last step as the predicted value of next step;
+* The `DNN` model is a simple shallow nerual networks with three hidden layers: 32 x 16 x 16;
+* The `Linear` model has the same feature set as the `DNN` model.
 
 Following table gives the inital `RMSE` of the three models without much tune:
 
@@ -31,7 +33,7 @@ Following table gives the inital `RMSE` of the three models without much tune:
 
 ### 0. Download the dataset
 Download `temperature.csv` from [Kaggle project](https://www.kaggle.com/selfishgene/historical-hourly-weather-data#temperature.csv);
-And put it to `./data/temperature.csv`
+and put it to `./data/temperature.csv`
 
 ### 1. Extract the data for one city
 ```bash
@@ -44,6 +46,14 @@ By default, it will extract the data for `Denver`, output=./data/denver.csv
 ```bash
 python gen_data.py
 ```
+This will genereate features for the training data and test data. Currently, the features are:
+* the values of last `10` time steps;
+* the deltas of the the last `10` time steps;
+* the `10` values of previous days aroud current time;
+* the deltas the previous days values;
+* the month of the data;
+* the day of the data;
+* the hour of the data;
 By default, output will be `./data/denver-features-test.csv` and `./data/denver-features-train.csv`
 
 ### 3. Train the model
