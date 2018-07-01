@@ -132,7 +132,7 @@ def main():
     fname_in = "./data/denver.csv"
     fname_out = "./data/denver-features"
 
-    generate_train_test_set(fname_in, fname_out)
+    generate_train_test_set(fname_in, fname_out, 0.80)
     return
 
 

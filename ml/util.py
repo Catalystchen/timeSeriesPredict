@@ -1,6 +1,16 @@
 from __future__ import division
 import matplotlib.pyplot as plt
+import math
 
+def calc_rmse(y, yh, n):
+    err = 0.0
+    for i in range(n):
+        delta = yh[i] - y[i]
+        delta = delta * delta
+        err += delta
+    
+    rmse = math.sqrt(err/n)
+    return rmse
 
 def plot_figs(dat, title):
     if len(dat) < 1:

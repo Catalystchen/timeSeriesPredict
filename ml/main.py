@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-"""Regression using the DNNRegressor Estimator."""
+"""Regression using the DNNRegressor/LinearRegressor Estimator."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -21,14 +21,16 @@ import tensorflow as tf
 import math
 import feature_dnn  
 
-STEPS = 30000
+STEPS = 40000
 VALUE_NORM_FACTOR = 50
 
 def get_nn_model(features):
   model = tf.estimator.DNNRegressor(
       hidden_units=[32, 16, 16], 
       feature_columns=features,
-      model_dir="./models/dnn",
+      #dropout=0.1,
+      activation_fn=tf.nn.tanh,
+      model_dir="./models/dnn"
   )
   return model
 
@@ -98,16 +100,16 @@ def generate_features():
       tf.feature_column.numeric_column(key="yyp4"),
 
       # deltas of yesterday
-      # for linear models, these deltas seems do not help
-      tf.feature_column.numeric_column(key="dd-5"),
-      tf.feature_column.numeric_column(key="dd-4"),
-      tf.feature_column.numeric_column(key="dd-3"),
-      tf.feature_column.numeric_column(key="dd-2"),
-      tf.feature_column.numeric_column(key="dd-1"),
-      tf.feature_column.numeric_column(key="dd-0"),
-      tf.feature_column.numeric_column(key="ddp1"),
-      tf.feature_column.numeric_column(key="ddp2"),
-      tf.feature_column.numeric_column(key="ddp3"),
+      ## for linear models, these deltas seems do not help
+      #tf.feature_column.numeric_column(key="dd-5"),
+      #tf.feature_column.numeric_column(key="dd-4"),
+      #tf.feature_column.numeric_column(key="dd-3"),
+      #tf.feature_column.numeric_column(key="dd-2"),
+      #tf.feature_column.numeric_column(key="dd-1"),
+      #tf.feature_column.numeric_column(key="dd-0"),
+      #tf.feature_column.numeric_column(key="ddp1"),
+      #tf.feature_column.numeric_column(key="ddp2"),
+      #tf.feature_column.numeric_column(key="ddp3"),
 
       # Since this is a DNN model, convert categorical columns from sparse
       # to dense.
@@ -134,7 +136,7 @@ def main(argv):
     return (
         # Shuffling with a buffer larger than the data set ensures
         # that the examples are well mixed.
-        train.shuffle(1000).batch(128)
+        train.shuffle(1000).batch(64)
         # Repeat forever
         .repeat().make_one_shot_iterator().get_next())
 
