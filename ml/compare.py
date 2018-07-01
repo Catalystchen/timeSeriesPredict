@@ -28,7 +28,7 @@ def main():
     dat = []
     dat.append(("real", y))
     dat.append(("predict", yh))
-    util.plot_figs(dat, "Base, rmse=%.4f"%(rmse))
+    util.plot_figs(dat, "Linear, rmse=%.4f"%(rmse))
     return
 
 if __name__ == "__main__":
