@@ -54,6 +54,7 @@ This will genereate features for the training data and test data. Currently, the
 * the month of the data;
 * the day of the data;
 * the hour of the data;
+
 By default, output will be `./data/denver-features-test.csv` and `./data/denver-features-train.csv`
 
 ### 3. Train the model
