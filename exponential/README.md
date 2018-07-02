@@ -25,3 +25,20 @@ Three variations of Exponential smoothing methods are implemented:
 * **Note 3**: *Holt-Winter* and *Holt-Winter-Damp* are using the multiplicative seasonality;
 * **Note 4**: the **RMSE** is calculated on the whole dataset (training + testing data).
 
+### Figures
+
+<div align="center">
+<img width="800" src="https://user-images.githubusercontent.com/27221807/42187305-9111e34e-7e1d-11e8-8c92-850c08cabfb9.png">
+  <p align="center"> Figure-1 Holt-Winter-Damp model for AirPassenger prediction. </p>
+</div>
+
+<div align="center">
+<img width="800" src="https://user-images.githubusercontent.com/27221807/42187576-8a26375a-7e1e-11e8-87f3-54cf147e25fc.png">
+  <p align="center"> Figure-2 Holt-Winter model for AirPassenger prediction. </p>
+</div>
+
+
+<div align="center">
+<img width="800" src="https://user-images.githubusercontent.com/27221807/42187554-7830c42a-7e1e-11e8-9da7-a4fcd4fbf9c0.png">
+  <p align="center"> Figure-3 Holt model for AirPassenger prediction. </p>
+</div>
