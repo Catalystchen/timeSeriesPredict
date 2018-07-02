@@ -26,6 +26,6 @@ For example, for on-line service workload, we can assume it has mulitple seasons
 
 Two machine learning methods: **Linear regression** and **neural-networks regression** are applied (using [Tensorflow](https://www.tensorflow.org)) to do the prediction.
 
-### directory structure
+### Directory structure
 * [`exponential`](./exponential) contains the implementation of exponential smoothing methods;
 * [`ml`](./ml) contains the implementation of the machine learning methods.
