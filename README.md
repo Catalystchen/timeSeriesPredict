@@ -8,7 +8,7 @@ This project uses `Statistical` and `Machine Learning` methods for time series d
 More specifically, the `Holt-Winters` methods, which take into account the moving average, trend, and seasonal characteristics.
 
 <div align="center">
-<img width="800" src="https://user-images.githubusercontent.com/27221807/42143859-64bc8026-7d85-11e8-9563-0d391921126e.png">
+<img width="800" src="https://user-images.githubusercontent.com/27221807/42187305-9111e34e-7e1d-11e8-8c92-850c08cabfb9.png">
   <p align="center"> Figure-1 Monthly AirPassenger prediction. </p>
 </div>
 
