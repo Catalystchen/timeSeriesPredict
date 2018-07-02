@@ -56,16 +56,25 @@ The training process to find the best values for parameters *alpha*, *Beta* and 
 </div>
 
 This is the **additive** Holt model. Multiplicative method can be found in the [online book](https://www.otexts.org/fpp/7/2).
+[`holt.py`](./holt.py) is the implementation of the additive method.
+
 
 ##### Holt-Winter model
 <div align="center">
 <img width="600" src="https://user-images.githubusercontent.com/27221807/42188165-cbf53616-7e20-11e8-965f-720f564e9e13.png">
 </div>
+
 This is the **additive** Holt-Winter model. Multiplicative method can be found in the [online book](https://www.otexts.org/fpp/7/5).
+
+[`holtwinterAdd.py`](./holtwinterAdd.py) and [`holtwinter.py`](./holtwinder.py) are the additive and multiplicative implementations.
 
 
 ##### Holt-Winter-Damp model
 <div align="center">
 <img width="600" src="https://user-images.githubusercontent.com/27221807/42188299-544e1316-7e21-11e8-9210-0edc48753340.png">
 </div>
+
 This is the equations of the **Multiplicative** Holt-Winter damped model. Multiplicative method can be found in the [online book](https://www.otexts.org/fpp/7/5).
+
+[`holtwinterd.py`](./holtwinterd.py) and [`holtwinterDAdd.py`](./holtwinterDAdd.py) are the additive and multiplicative implementations.
+
