@@ -1,9 +1,10 @@
 # timeSeriesPredict
-This project uses `Statistical` and `Machine Learning` methods for time series data prediction. As suggested in the paper [`Statistical and Machine Learning forecasting methods: Concerns and ways forward`](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0194889), both types of methods are effective.
+This project uses `Statistical` and `Machine Learning` methods for time series data prediction. As suggested in the paper [`Statistical and Machine Learning forecasting methods: Concerns and ways forward`](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0194889), both types of methods are effective. So they are implemented in this project to do one step ahead prediction.
+
 
 
 ## Statistical methods
-[`Exponential smoothing`](https://en.wikipedia.org/wiki/Exponential_smoothing) methods are implemented to for time series data prediction.
+[`Exponential smoothing`](https://en.wikipedia.org/wiki/Exponential_smoothing) methods are implemented for time series data prediction.
 More specifically, the `Holt-Winters` methods, which take into account the moving average, trend, and seasonal characteristics.
 
 <div align="center">
