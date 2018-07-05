@@ -35,7 +35,7 @@ def simple_test(y, ytest):
     #optimizer.optimize(model, ytrain)
 
     err, yh = model.predict(ytest)
-    rerr = 100 * math.sqrt(err)
+    rerr = 100 * err
     msg = "season=%s, error=%.4f" % (model.get_season(), rerr)
     print(msg + "\n" + model.get_info())
 
