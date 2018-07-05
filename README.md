@@ -12,6 +12,13 @@ More specifically, the `Holt-Winters` methods, which take into account the movin
   <p align="center"> Figure-1 Monthly AirPassenger prediction. </p>
 </div>
 
+<div align="center">
+<img width="800" src="https://user-images.githubusercontent.com/27221807/42300962-e7ea2a36-7fe0-11e8-9cd3-c8a54b1233b0.png">
+  <p align="center"> Figure-2 Hourly temperature prediction. </p>
+</div>
+
+
+
 
 ## Machine learning methods
 Inspired by the statistical methods, for machine learning methods, we can draw features based on recent moving averae, trend, and multiple
@@ -21,7 +28,7 @@ For example, for on-line service workload, we can assume it has mulitple seasons
 
 <p align="center">
 <img width="800" src="https://user-images.githubusercontent.com/27221807/42143980-73f0b1ba-7d86-11e8-8267-7910b022dbdd.png">
-<p align="center"> Figure-2 Hourly temperature prediction.</p>
+<p align="center"> Figure-3 Hourly temperature prediction.</p>
 </p>
 
 Two machine learning methods: **Linear regression** and **neural-networks regression** are applied (using [Tensorflow](https://www.tensorflow.org)) to do the prediction.
