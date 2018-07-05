@@ -27,7 +27,7 @@ Following table gives the inital `RMSE` of the three models without much tune:
 |Holt-Winter-D| 1.9 | 1.6045 |  <!-- [0.490, 0.548, 1.000, 0.848] -->
 |Holt-Winter| 1.9 | 1.6063 | <!-- [0.503, 0.577, 1.000] -->
 
-<div >
+<div align="center">
 <img width="800" src="https://user-images.githubusercontent.com/27221807/42130796-2e2696fa-7cbd-11e8-99c9-c84ccd720131.png">
  <p align="center"> Figure-1 DNN model for Hourly temperature prediction. </p>
 </div>
