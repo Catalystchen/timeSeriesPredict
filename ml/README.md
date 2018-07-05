@@ -24,7 +24,7 @@ Following table gives the inital `RMSE` of the three models without much tune:
 |Baseline |-| 1.6046 |
 |DNN | 1.3849 | 1.1665 | 
 |Linear | 1.3946 |**1.1378** |
-|Holt-Winter-D| 1.9 | 1.6045 |  <!-- [0.490, 0.548, 1.000, 0.848] -->
+|Holt-Winter-D| 1.9 | 1.6045 |  <!-- [0.816, 0.695, 1.000, 0.793] -->
 |Holt-Winter| 1.9 | 1.6063 | <!-- [0.503, 0.577, 1.000] -->
 
 <div align="center">
