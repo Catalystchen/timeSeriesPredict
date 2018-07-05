@@ -29,6 +29,12 @@ Following table gives the inital `RMSE` of the three models without much tune:
 
 <div >
 <img width="800" src="https://user-images.githubusercontent.com/27221807/42130796-2e2696fa-7cbd-11e8-99c9-c84ccd720131.png">
+ <p align="center"> Figure-1 DNN model for Hourly temperature prediction. </p>
+</div>
+
+<div align="center">
+<img width="800" src="https://user-images.githubusercontent.com/27221807/42300962-e7ea2a36-7fe0-11e8-9cd3-c8a54b1233b0.png">
+  <p align="center"> Figure-2 Holt-Winter-D model for Hourly temperature prediction. </p>
 </div>
 
 # Train the models
